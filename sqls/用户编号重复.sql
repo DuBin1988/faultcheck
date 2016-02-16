@@ -1,0 +1,1 @@
+select f_userid ,count(*)  'num' from t_userfiles  group by f_userid having count(*) > 1
