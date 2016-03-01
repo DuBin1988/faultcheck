@@ -48,7 +48,7 @@ public class HandDiskSpaceChecker implements IChecker {
 			String freeStr = freeDou + "G";
 			String total = this.FormatFileSize(f.getTotalSpace()) + "G";
 			log.debug("磁盘" + disk + ",总空间" + total + ",剩余空间" + freeStr);
-			if (freeDou < 10) {
+			if (freeDou < 2) {
 				Map exception = new HashMap();
 				exception.put("f_exceptionname", this.exceptionName);
 				exception.put("f_data", "磁盘" + disk + ",总空间:" + total
