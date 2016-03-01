@@ -49,18 +49,22 @@ public class MonitorCheckJob extends QuartzJobBean {
 		try {
 			log.debug("π ’œºÏ≤‚ø™ º÷¥––===>" + new Date());
 			JSONObject toChecker = new JSONObject();
-			toChecker.put("deployName", this.deployName);
+			//toChecker.put("deployName", this.deployName);
 			ServletContext sc = ContextListener.getContext();
 			ApplicationContext ctx = WebApplicationContextUtils
 					.getWebApplicationContext(sc);
 			Map checkers = ctx.getBeansOfType(IChecker.class);
 			Iterator key = checkers.keySet().iterator();
 			while (key.hasNext()) {
-				String beanNames = key.next().toString();
-				log.debug("ºÏ≤‚∆˜"+beanNames+"ø™ º÷¥––==>" + new Date());
-				IChecker c = (IChecker) checkers.get(beanNames);
-				c.txcheck(toChecker);
-				log.debug("ºÏ≤‚∆˜"+beanNames+"÷¥––Ω· ¯==>" + new Date());
+				try {
+					String beanNames = key.next().toString();
+					log.debug("ºÏ≤‚∆˜" + beanNames + "ø™ º÷¥––==>" + new Date());
+					IChecker c = (IChecker) checkers.get(beanNames);
+					c.txcheck(toChecker);
+					log.debug("ºÏ≤‚∆˜" + beanNames + "÷¥––Ω· ¯==>" + new Date());
+				} catch (Exception e) {
+					log.debug("“Ï≥£" + e.getMessage());
+				}
 			}
 		} catch (Exception e) {
 			log.debug("“Ï≥£" + e.getMessage());

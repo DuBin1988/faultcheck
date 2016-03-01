@@ -13,9 +13,8 @@
 	<bean id="cronTrigger"
 	    class="org.springframework.scheduling.quartz.CronTriggerBean">
 	    <property name="jobDetail" ref="monitorCheckJob" />
-	   <!-- <property name="cronExpression" value="0 29  15 * * ? *" />-->
-	    <property name="cronExpression" value="0 47  18 * * ? *" />
-	   
+	     <property name="cronExpression" value="0 03  16 * * ? *" /> 
+ 	   
 	</bean>	
 	
 	<!-- Spring Quartz -->
@@ -46,6 +45,12 @@
 	   <property name="sessionFactory" ref="sessionFactory"/>
 	   <property name="fileName" value="./用户编号重复.sql" />
 	   <property name="exceptionName" value="用户编号重复" />
+  	</bean>
+  	
+  	<!-- 硬盘空间检查 -->
+	<bean id="diskSpaceChecker" class="com.af.faultcheck.checker.HandDiskSpaceChecker" >
+	   <property name="sessionFactory" ref="sessionFactory"/>
+	    <property name="exceptionName" value="硬盘空间过低" />
   	</bean>
   
 </beans>
